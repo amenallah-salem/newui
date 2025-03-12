@@ -1,3 +1,5 @@
+#!/bin/bash
+
 huggingface-cli download Qwen/Qwen2-0.5B-Instruct-GGUF qwen2-0_5b-instruct-q2_k.gguf \
   --local-dir models/gguf --local-dir-use-symlinks False
 

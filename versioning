@@ -1,0 +1,11 @@
+llamacpp: b4783
+llamacpp_stable_hash: 7841fc723e059d1fd9640e5c0ef19050fcc7c698
+owui: 0.5.20
+owui_stable_hash: 3b70cd64d7fa6902e8c79cf8dcbf3c7e84cf704b
+models-registery :
+    dev:
+        - 
+        -
+    prod: 
+        - 
+        -

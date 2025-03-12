@@ -1,18 +1,30 @@
 # Use the official Python image
 FROM python:3.11
 
-# Set the working directory inside the container
 WORKDIR /app
-#sudo apt-get install make cmake build-essentials python3 pip
-# Install venv
+
+
 RUN python -m pip install --upgrade pip && \
     python -m venv /venv
+ENV PATH="/venv/bin:$PATH"
 
-# Copy the .sh script to the container
-COPY your_script.sh /app/your_script.sh
+COPY requirements-dev.txt ./
+RUN pip install -r requirements-dev.txt
 
-# Give execution permissions to the .sh script
-RUN chmod +x /app/your_script.sh
+COPY scripts /app/scripts
 
-# Run the .sh script
-CMD ["/bin/bash", "/app/your_script.sh"]
+RUN chmod +x /app/scripts/build_start_front.sh
+RUN chmod +x /app/scripts/init_back.sh
+RUN chmod +x /app/scripts/start_back.sh
+RUN chmod +x /app/scripts/start_servers.sh
+RUN chmod +x /app/scripts/pull_models.sh 
+RUN chmod +x /app/scripts/set_env.sh 
+
+RUN ./scripts/build_start_front.sh
+RUN ./scripts/pull_models.sh
+RUN ./scripts/init_back.sh
+RUN ./scripts/start_back.sh
+RUN ./scripts/start_servers.sh
+RUN ./scripts/start_servers.sh
+
+CMD ["/bin/bash", "python --version"]

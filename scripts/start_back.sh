@@ -1,3 +1,4 @@
-cd src/backend
-pip install -r requirements.txt
+#!/bin/bash
+
+#ensure that we are in src/backend
 bash start.sh
