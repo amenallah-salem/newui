@@ -1,7 +1,7 @@
 
 
 # Depricated 7/3/2025
-<details open>
+<details>
 <summary>Depricated</summary>
 project name has been changed to Hermes instead of doc-miner 
 NOTE: Hermes is not the final agreed name for the project 
