@@ -1,4 +1,7 @@
+# New version 1.0.1
+make release: ```./scripts/build_pycli.sh```
 
+publish release: ```AUTO RELEASE NOT IMPLEMENTED ```
 
 # Depricated 7/3/2025
 <details>

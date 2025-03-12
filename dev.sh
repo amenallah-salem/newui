@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd src
-npm run dev -d 
-cd src/backend
-bash start.sh -d 
+cd ./src
+npm run dev -d &  # Run the front-end in the background
+cd ./backend      # Go back to the parent directory to access the backend
+bash start.sh -d   # Start the back-end

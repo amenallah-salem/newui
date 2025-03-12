@@ -1,4 +1,4 @@
-#cpu dev requirements
+#gpu dev requirements
 
 numpy<2,>=1
 transformers==4.38.0
