@@ -1,10 +1,11 @@
 # New version 1.0.1
 
-Build using docker 
+Build nativally using docker 
 
     - linux:: ubuntu dist: 
         - docker build -t ubuntu20.04 -f docker/make_release/ubuntu20.04/Dockerfile .
-            - To run the container : docker run -it --name my_ubuntu_container ubuntu20.04
+            - To run the container : docker run -it HASH_ID 
+        
 make release: ```./scripts/build_pycli.sh```
 
 publish release: ```AUTO RELEASE NOT IMPLEMENTED ```

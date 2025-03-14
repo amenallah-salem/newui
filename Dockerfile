@@ -1,32 +1,64 @@
-# Use the official Python image
-#base : https://github.com/open-webui/open-webui/blob/main/Dockerfile
+# Use the official Python 3.11 slim image as the base
+FROM python:3.11-slim-bookworm AS base
 
-FROM python:3.11
+# Set build arguments
+ARG USE_CUDA=false
+ARG USE_CUDA_VER=cu121
+ARG BUILD_HASH=dev-build
 
+# Set the environment variable to avoid interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install necessary packages in a single RUN command to reduce layers
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        bash \
+        git \
+        build-essential \
+        pandoc \
+        netcat-openbsd \
+        curl \
+        gcc \
+        python3-dev \
+        ffmpeg \
+        libsm6 \
+        libxext6 \
+        jq \
+        zip && \
+    # Clean up to reduce image size
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set the working directory
 WORKDIR /app
 
-
-RUN python -m pip install --upgrade pip && \
-    python -m venv /venv
-ENV PATH="/venv/bin:$PATH"
-
+# Copy only the necessary files first to leverage Docker cache
 COPY requirements-dev.txt ./
-RUN pip install -r requirements-dev.txt
+RUN pip install --no-cache-dir -r requirements-dev.txt
 
-COPY scripts /app/scripts
+# Copy the rest of the project files into the container
+COPY . .
 
-RUN chmod +x /app/scripts/build_start_front.sh
-RUN chmod +x /app/scripts/init_back.sh
-RUN chmod +x /app/scripts/start_back.sh
-RUN chmod +x /app/scripts/start_servers.sh
-RUN chmod +x /app/scripts/pull_models.sh 
-RUN chmod +x /app/scripts/set_env.sh 
+# Make the build script executable and run it
+RUN chmod +x ./scripts/build_pycli@docker.sh && \
+    ./scripts/build_pycli@docker.sh
 
-RUN ./scripts/build_start_front.sh
-RUN ./scripts/pull_models.sh
-RUN ./scripts/init_back.sh
-RUN ./scripts/start_back.sh
-RUN ./scripts/start_servers.sh
-RUN ./scripts/start_servers.sh
+# Download and unzip the required files in a single RUN command
+RUN wget -q https://github.com/ggml-org/llama.cpp/releases/download/b4783/llama-b4783-bin-ubuntu-x64.zip && \
+    unzip -q llama-b4783-bin-ubuntu-x64.zip -d llama.cpp.bin && \
+    cp -r llama.cpp.bin/ releases/ubuntu20.04anylinux/ && \
+    rm llama-b4783-bin-ubuntu-x64.zip  # Clean up the zip file
 
-CMD ["/bin/bash", "python --version"]
+# Combine the zipping logic into a single RUN command
+RUN for item in releases/ubuntu20.04anylinux/*; do \
+        if [ -f "$item" ]; then \
+            echo "Zipping file: $item"; \
+            zip -q "${item}.zip" "$item"; \
+        elif [ -d "$item" ]; then \
+            echo "Zipping directory: $item"; \
+            zip -rq "${item}.zip" "$item"; \
+        fi; \
+    done
+
+# Set the default command
+CMD ["/bin/bash"]
