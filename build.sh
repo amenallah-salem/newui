@@ -1,3 +1,3 @@
 #!/bin/bash
 docker compose down --remove-orphans
-docker-compose up --build
+docker compose -f docker-compose-build-pycli.yml up --build
