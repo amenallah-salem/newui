@@ -1,4 +1,6 @@
 # Use the official Python image
+#base : https://github.com/open-webui/open-webui/blob/main/Dockerfile
+
 FROM python:3.11
 
 WORKDIR /app
