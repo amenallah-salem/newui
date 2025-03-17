@@ -1,7 +1,10 @@
 
 models
 venv
-llama.cpp.bin
+!llama.cpp.bin
+!/scripts/
+!/scripts/**
+
 src
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,venv,pycharm
