@@ -1,4 +1,4 @@
 #!/bin/bash
 
 #ensure that we are in src/backend
-bash start.sh
+bash start.sh  

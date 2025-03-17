@@ -8,7 +8,6 @@ USERS=[
         "password": "" 
     }
 ]
-
 if __name__=="__main__":
     import pprint
     pprint.pprint(USERS)

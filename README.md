@@ -6,7 +6,7 @@ Build nativally using docker
         - docker build -t ubuntu20.04 -f docker/make_release/ubuntu20.04/Dockerfile .
             - To run the container : docker run -it HASH_ID 
         
-make release: ```./scripts/build_pycli.sh```
+make release: ```./uild.sh```
 
 publish release: ```AUTO RELEASE NOT IMPLEMENTED ```
 

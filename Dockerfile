@@ -24,9 +24,10 @@ RUN apt-get update && \
         libsm6 \
         libxext6 \
         jq \
-        zip && \
+        zip unzip && \ 
     # Clean up to reduce image size
     apt-get clean && \
+    apt-get install wget && \
     rm -rf /var/lib/apt/lists/*
 
 # Set the working directory
