@@ -22,7 +22,20 @@ chmod +x ./scripts/init_back.sh
 ./scripts/init_back.sh
 >> kill the terminal 
 ###############################
+chmod +x ./scripts/set_env.sh
+./scripts/set_env.sh
+>> kill the terminal 
+###############################
+chmod +x ./scripts/pull_models.sh
+./scripts/pull_models.sh
+>> kill the terminal 
+###############################
 
+Start the project: 
+chmod +x ./scripts/start_front.sh
+./scripts/start_front.sh
+
+chmod +x ./scripts/start_back.sh
 
 #################################################################################"
 #################################################################################"
