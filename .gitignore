@@ -4,8 +4,8 @@ venv
 !llama.cpp.bin
 !/scripts/
 !/scripts/**
-
-src
+venv
+!src
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,venv,pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode,venv,pycharm
