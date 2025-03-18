@@ -43,23 +43,15 @@ COPY . .
 # Make the build script executable and run it
 RUN chmod +x ./scripts/build_pycli@docker.sh && \
     ./scripts/build_pycli@docker.sh
+RUN mkdir releases
+RUN mkdir releases/ubuntu20.04anylinux/
+RUN cp -r src/dist releases/ubuntu20.04anylinux/
 
 # # Download and unzip the required files in a single RUN command
-# RUN wget -q https://github.com/ggml-org/llama.cpp/releases/download/b4783/llama-b4783-bin-ubuntu-x64.zip && \
-#     unzip -q llama-b4783-bin-ubuntu-x64.zip -d llama.cpp.bin && \
-#     cp -r llama.cpp.bin/ releases/ubuntu20.04anylinux/ && \
-#     rm llama-b4783-bin-ubuntu-x64.zip  # Clean up the zip file
-
-# # Combine the zipping logic into a single RUN command
-# RUN for item in releases/ubuntu20.04anylinux/*; do \
-#         if [ -f "$item" ]; then \
-#             echo "Zipping file: $item"; \
-#             zip -q "${item}.zip" "$item"; \
-#         elif [ -d "$item" ]; then \
-#             echo "Zipping directory: $item"; \
-#             zip -rq "${item}.zip" "$item"; \
-#         fi; \
-#     done
+RUN wget -q https://github.com/ggml-org/llama.cpp/releases/download/b4783/llama-b4783-bin-ubuntu-x64.zip && \
+    unzip -q llama-b4783-bin-ubuntu-x64.zip -d llama.cpp.bin && \
+    cp -r llama.cpp.bin/ releases/ubuntu20.04anylinux/ && \
+    rm llama-b4783-bin-ubuntu-x64.zip  # Clean up the zip file
 
 # Set the default command
 CMD ["/bin/bash"]
