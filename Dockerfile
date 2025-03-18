@@ -43,10 +43,11 @@ COPY . .
 # Make the build script executable and run it
 RUN chmod +x ./scripts/build_pycli@docker.sh && \
     ./scripts/build_pycli@docker.sh
-RUN mkdir releases
-RUN mkdir releases/ubuntu20.04anylinux/
-RUN cp -r src/dist releases/ubuntu20.04anylinux/
-
+RUN mkdir -p releases
+RUN mkdir -p releases/ubuntu20.04anylinux/ && \
+    rm -rf releases/ubuntu20.04anylinux/* && \
+    cp -r src/dist/* releases/ubuntu20.04anylinux/
+    
 # # Download and unzip the required files in a single RUN command
 RUN wget -q https://github.com/ggml-org/llama.cpp/releases/download/b4783/llama-b4783-bin-ubuntu-x64.zip && \
     unzip -q llama-b4783-bin-ubuntu-x64.zip -d llama.cpp.bin && \
