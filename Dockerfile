@@ -49,10 +49,10 @@ RUN mkdir -p releases/ubuntu20.04anylinux/ && \
     cp -r src/dist/* releases/ubuntu20.04anylinux/
     
 # # Download and unzip the required files in a single RUN command
-RUN wget -q https://github.com/ggml-org/llama.cpp/releases/download/b4783/llama-b4783-bin-ubuntu-x64.zip && \
-    unzip -q llama-b4783-bin-ubuntu-x64.zip -d llama.cpp.bin && \
-    cp -r llama.cpp.bin/ releases/ubuntu20.04anylinux/ && \
-    rm llama-b4783-bin-ubuntu-x64.zip  # Clean up the zip file
+# RUN wget -q https://github.com/ggml-org/llama.cpp/releases/download/b4783/llama-b4783-bin-ubuntu-x64.zip && \
+#     unzip -q llama-b4783-bin-ubuntu-x64.zip -d llama.cpp.bin && \
+#     cp -r llama.cpp.bin/ releases/ubuntu20.04anylinux/ && \
+#     rm llama-b4783-bin-ubuntu-x64.zip  # Clean up the zip file
 
 # Set the default command
 CMD ["/bin/bash"]
