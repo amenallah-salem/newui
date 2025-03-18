@@ -33,7 +33,7 @@ chmod +x ./scripts/start_back.sh
 ./scripts/start_back.sh
 
 
-### DOCKER INIT 
+### DOCKER BUILD RELEASES 
 chmod +x ./build.sh
 ./build.sh
 
